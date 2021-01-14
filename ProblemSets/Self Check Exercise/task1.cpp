@@ -19,7 +19,7 @@ void compute_stats(int array[], int size, double* average,double* stddev)
         *stddev += ((array[j] - *average) * (array[j] - *average));
         j++;
     }
-    *stddev = sqrt(*stddev / (size - 1));
+    *stddev = sqrt( *stddev / (size - 1));
 }
 
 int main()
