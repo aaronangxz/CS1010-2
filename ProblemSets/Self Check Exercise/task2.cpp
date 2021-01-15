@@ -1,11 +1,38 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
 void n_unique(const string& input, string& result, int nCopy)
 {
+    result = "";
+    vector<int> count(26);
+    for (int i = 0; i < count.size(); i++)
+    {
+        count[i] = 0;
+    }
+    
+    int pos;
+
+    for (int i = 0; i < input.size(); i++) 
+    {
+        if (input[i] >= 97 and input[i] <= 122) 
+        {
+            pos = input[i]-97;
+            if (count[pos] < nCopy)
+            {
+                result += input[i];
+            }
+            count[pos]++;
+        } 
+        else 
+        {
+            result += input[i]; 
+        }
+    }
 }
+        
 
 int main()
 {
