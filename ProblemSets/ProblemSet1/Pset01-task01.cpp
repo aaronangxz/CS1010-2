@@ -79,9 +79,9 @@ int main()
 	//Comment / modify the following statements to test
 	//You can attempt the parts independently
 
-	// print_solid_slanted_pyramid(4);
+	print_solid_slanted_pyramid(4);
 
-	// print_solid_symmetric_pyramid(4);
+	print_solid_symmetric_pyramid(4);
 
 	print_hollow_symmetric_pyramid( 4, '#', '$');
 
