@@ -110,17 +110,20 @@ void printLine( Line &lRef )
 }
 
 double length( Line *l )
-{
+{ 
+    
     return 0;   //Remember to change this
 }
 
 double length2( Line& l )
-{
+{   
+    
     return 0;   //Remember to change this
 }
 
 
 int compareLine( Line& L1, Line& L2 ) 
 {
+
 }
 

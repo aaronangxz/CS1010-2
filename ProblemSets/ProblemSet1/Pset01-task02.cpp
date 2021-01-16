@@ -20,7 +20,7 @@ void make_date(Date& newDate, int year, int month, int day)
     newDate = {year, month, day};
 }
 
-int compare_date( Date& dateA, Date& dateB )
+int compare_date( Date& dateA, Date& dateB)
 {
 	if (dateA.year == dateB.year)
     {
