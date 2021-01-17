@@ -124,20 +124,8 @@ double length2( Line& l )
 
 int compareLine( Line& L1, Line& L2 ) 
 {
-    if (length(&L1) > length(&L2))
-    {
-        return 1;
-    }
-    else if (length(&L2) > length(&L1))
-    {
-        return -1;
-    }
-    else
-    {
-        return 0;
-    }
-    
-    
-    
+    if (length(&L1) > length(&L2)) return -1;
+    else if (length(&L2) > length(&L1))return 1;
+    else return 0;
 }
 
