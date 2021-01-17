@@ -52,13 +52,6 @@ int main()
 void matmul_one_element( int A[][P], int B[][N], int C[][N], 
                         int i, int j) 
 {
-    // for (int matA = 0; matA <= P; matA++)
-    // {
-    //     for (int matB = 0; matB <= N; matB++)
-    //     {
-    //         C[i][j] += A[i][matA] * B[matB][j];
-    //     }
-    // }
     for (int k = 0; k < P; k++)
     {
         C[i][j] += A[i][k] * B[k][j];
