@@ -19,10 +19,12 @@ This module builds on basic knowledge from TIC1001. Students will learn how to m
 8. C++ and OOP<br>
 
 **Tutorial**<br>
+1. Structure, Nested Loop, Composite Data Structures <br>
 
 **Lab**<br>
 
 **Problem Sets**<br>
+1. Structure, Nested Loop, Composite Data Structures <br>
 
 **Extra**<br>
 
