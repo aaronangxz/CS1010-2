@@ -44,7 +44,22 @@ void init_alien_planet( const char filename[], char alienPlanet[][PLANET_SIZE])
 
 void save_alien_planet(const char filename[], char matrix[][20])
 {
+    ifstream inf(filename);
+    char temp;
+    int i, j;
 
+    //Ensure the file can be opened
+    if (!inf.is_open()){
+        cout << "Error in opening file!\n";
+        return;
+    }
+
+    for (i = 0; i < PLANET_SIZE; i++){
+        for (j = 0; j < PLANET_SIZE; j++){
+            
+        }
+    }
+    inf.close();
 }
 
 
