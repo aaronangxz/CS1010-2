@@ -20,7 +20,7 @@ using namespace std;
 //This function is provided for you to review file stream
 //Use similar idea for the save_alien_planet() function
 
-void init_alien_planet( const char filename[], char alienPlanet[][PLANET_SIZE])
+void init_alien_planet( const char filename[], char alienPlanet[][20])
 {
     ifstream inf(filename);
     char temp;
@@ -33,18 +33,17 @@ void init_alien_planet( const char filename[], char alienPlanet[][PLANET_SIZE])
     }
 
     //Proceed to read the file content into char 2D array
-    for (i = 0; i < PLANET_SIZE; i++){
-        for (j = 0; j < PLANET_SIZE; j++){
+    for (i = 0; i < 20; i++){
+        for (j = 0; j < 20; j++){
             inf >> alienPlanet[i][j];
         }
     }
     inf.close();
 }
 
-
 void save_alien_planet(const char filename[], char matrix[][20])
 {
-    ifstream inf(filename);
+    ofstream inf(filename);
     char temp;
     int i, j;
 
@@ -54,8 +53,8 @@ void save_alien_planet(const char filename[], char matrix[][20])
         return;
     }
 
-    for (i = 0; i < PLANET_SIZE; i++){
-        for (j = 0; j < PLANET_SIZE; j++){
+    for (i = 0; i < 20; i++){
+        for (j = 0; j < 20; j++){
             
         }
     }
@@ -65,7 +64,36 @@ void save_alien_planet(const char filename[], char matrix[][20])
 
 void evolve_alien_planet(char alienPlanet[][20], int nGeneration)
 {
-
+    char Evolved[20][20];
+    for (int row = 0; row < 20; row++)
+    {
+        for (int col = 0; col < 20; col++)
+        {
+            int neighbours = 0;
+            for (int i = 0; i <= row + 1 ; i++)
+            {
+                for (int j = 0; j <= col + 1; j++)
+                {
+                    //Next col on right
+                    if (col > 0 && alienPlanet[row][col - 1] == ALIVE )
+                    {
+                        /* code */
+                    }
+                    if (col < 19 && alienPlanet[row][col + 1] == ALIVE)
+                    {
+                        /* code */
+                    }
+                    
+                    
+                }
+                
+            }
+            
+            
+        }
+        
+    }
+    
 }
 
 /***********************************************************
