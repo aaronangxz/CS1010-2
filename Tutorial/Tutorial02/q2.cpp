@@ -5,8 +5,14 @@ using namespace std;
 
 int climb_stair(int N)
 {
-	return 0;   //Remember to change the return value too
+ 	if (N == 1 || N == 0)
+        return 1;
+    else if (N == 2)
+        return 2;
+    else
+        return climb_stair(N - 3) + climb_stair(N - 2)+ climb_stair(N - 1);
 }
+
 
 int main()
 {
