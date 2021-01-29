@@ -2,7 +2,7 @@
 <img src="http://www.nus.edu.sg/images/default-source/identity-images/NUS_logo_full-vertical.jpg" alt="NUS" width="100"/>
 <h1>CS1010 / TIC1002</h1>
 
-![Image of MEME](https://i.imgur.com/IucRlyv.jpg)
+![Image of MEME](https://i.imgur.com/tVTBYDQ.jpeg)
 
 This module builds on basic knowledge from TIC1001. Students will learn how to model a problem and how to design and implement solutions to computational problems. TIC1002 also introduces the methodologies and good practices of programming: testing, debugging, assertion, documentation, and tools such as linter, and debugger. Students will be exposed to more complex problems and learn to abstract out the complexities and to compose programmes from smaller, reusable components. Finally, students will be introduced to object-oriented programming paradigm as a powerful way of composing reusable components to form larger, more complex, programmes.
 <br>
