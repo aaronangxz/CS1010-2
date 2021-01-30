@@ -60,7 +60,14 @@ void print_field(int field[][MAXCOL], int nRow, int nCol)
     {
         for (int j = 0; j < nCol; j++)
         {
-            cout << field[i][j];
+            if (field[i][j] < MINE)
+            {
+                cout << field[i][j];
+            }
+            else
+            {
+                cout << "M";
+            } 
         }
         cout << endl;   
     }
@@ -69,11 +76,11 @@ void print_field(int field[][MAXCOL], int nRow, int nCol)
 bool valid_check(int row, int col)
 {
     //If out of bounds, dont count
-    if ((row >= 0 && row <= MAXROW) && (col >= 0 && col <= MAXCOL))    
+    if ((row >= 0 && row < MAXROW) && (col >= 0 && col < MAXCOL))    
     {
         return true;
     }
-    else return false;
+    return false;
 }
 
 void update_neighbour(int field[][MAXCOL], int row, int col)
@@ -97,7 +104,7 @@ void update_neighbour(int field[][MAXCOL], int row, int col)
         S.E--> South-East   (row+1, col+1) 
         S.W--> South-West   (row+1, col-1)
     */
-        if (valid_check(row - 1,col) == true) field[row - 1][col] ++;
+    /*    if (valid_check(row - 1,col) == true) field[row - 1][col] ++;
         if (valid_check(row + 1,col) == true) field[row + 1][col] ++;
         if (valid_check(row,col + 1) == true) field[row][col + 1] ++;
         if (valid_check(row,col - 1) == true) field[row][col - 1] ++;
@@ -105,6 +112,14 @@ void update_neighbour(int field[][MAXCOL], int row, int col)
         if (valid_check(row - 1,col - 1) == true) field[row - 1][col - 1] ++;
         if (valid_check(row + 1,col + 1) == true) field[row + 1][col + 1] ++;
         if (valid_check(row + 1,col - 1) == true) field[row + 1][col - 1] ++;
+    */
+        for (int i = row - 1; i <= row + 1; i++)
+        {
+            for (int j = col - 1; j <= col + 1; j++)
+            {
+                if (valid_check(i,j)) field[i][j]++ ;
+            }
+        }
 }
 
 void plant_mine(int field[][MAXCOL], int nRow, int nCol, int nMine)
@@ -129,38 +144,38 @@ void plant_mine(int field[][MAXCOL], int nRow, int nCol, int nMine)
 
 void plant_mine_halo(int field[][MAXCOL], int nRow, int nCol, int nMine)
 {
-    int field_halo[22][22];
+    int field_halo[MAXROW + 2][MAXCOL + 2] = {{0}};
 
-    for (int i = 0; i < nRow; i++)
+    for (int i = 0; i < MAXROW; i++)
     {
-        field_halo[i][0] = 0;
-        field_halo[i][21] = 0;       
+        for (int j = 0; j < MAXCOL; j++)
+        {
+            field_halo[i+1][j+1] = field[i][j];
+        }
     }
     
-    for (int j = 0; j < nCol; j++)
-    {
-        field_halo[0][j] = 0;
-        field_halo[21][j] = 0;
-    }
-    
-
     int i, row, col;
 
     for (i = 0; i < nMine; i++)
     {
-        row = rand() % nRow;
-        col = rand() % nCol;
+        row = (rand() % nRow) + 1 ;
+        col = (rand() % nCol) + 1;
         printf("Planting mine at [%d][%d]\n", row, col);
-        //Only when current cell is not a mine
-        if (field[row][col] != 9)
+    }
+    field_halo[row][col] = MINE;
+    for (int i = row - 1; i < row + 1; i++)
+    {
+        for (int j = col - 1; j < col + 1; j++)
         {
-            field[row][col] = MINE;
-            update_neighbour(field, row, col);  
+            field_halo[i][j]++;
         }
-        //Otherwise generate new random cell
-        else i--;
     }
 
+    for (int i = 0; i < MAXROW; i++)
+    {
+        for (int j = 0; j < MAXCOL; j++)
+        {
+            field[i][j] = field_halo[i+1][j+1];
+        }
+    }
 }
-
-

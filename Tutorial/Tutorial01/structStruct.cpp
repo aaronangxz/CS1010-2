@@ -100,32 +100,32 @@ void printPoint( Point& pRef )
 
 void readLine( Line &lRef )
 {
-    cout << "Enter Start and End of a line " << endl;
-    cin >> lRef.start.X >> lRef.start.Y;
-    cout << endl;
-    cin >> lRef.end.X >> lRef.end.Y;
+    readPoint(lRef.start);
+    readPoint(lRef.end);
 }
 
 void printLine( Line &lRef )
 {
-    printf("(%d,%d,%d,%d)\n",lRef.start.X,lRef.start.Y,lRef.end.X,lRef.end.Y);
+    printPoint(lRef.start);
+    printPoint(lRef.end);
 }
 
 double length( Line *l )
 { 
     return sqrt(((l->end.X - l->start.X) * (l->end.X - l->start.X)) + ((l->end.Y - l->start.Y) * (l->end.Y - l->start.Y)));
+    //return sqrt(pow(l->end.X - l->start.X,2) + pow(l->end.X - l->start.X,2));
 }
 
 double length2( Line& l )
 {   
     return sqrt(((l.end.X - l.start.X) * (l.end.X - l.start.X)) + ((l.end.Y - l.start.Y) * (l.end.Y - l.start.Y)));
+    //return sqrt(pow(l.end.X - l.start.X,2) + pow(l.end.X - l.start.X,2));
 }
 
 
 int compareLine( Line& L1, Line& L2 ) 
 {
-    if (length(&L1) > length(&L2)) return -1;
-    else if (length(&L2) > length(&L1))return 1;
+    if (length2(L1) > length2(L2)) return -1;
+    else if (length2(L2) > length2(L1))return 1;
     else return 0;
 }
-
