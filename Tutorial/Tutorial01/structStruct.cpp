@@ -112,14 +112,14 @@ void printLine( Line &lRef )
 
 double length( Line *l )
 { 
-    return sqrt(((l->end.X - l->start.X) * (l->end.X - l->start.X)) + ((l->end.Y - l->start.Y) * (l->end.Y - l->start.Y)));
-    //return sqrt(pow(l->end.X - l->start.X,2) + pow(l->end.X - l->start.X,2));
+    //return sqrt(((l->end.X - l->start.X) * (l->end.X - l->start.X)) + ((l->end.Y - l->start.Y) * (l->end.Y - l->start.Y)));
+    return sqrt(pow(l->end.X - l->start.X,2) + pow(l->end.X - l->start.X,2));
 }
 
 double length2( Line& l )
 {   
-    return sqrt(((l.end.X - l.start.X) * (l.end.X - l.start.X)) + ((l.end.Y - l.start.Y) * (l.end.Y - l.start.Y)));
-    //return sqrt(pow(l.end.X - l.start.X,2) + pow(l.end.X - l.start.X,2));
+    //return sqrt(((l.end.X - l.start.X) * (l.end.X - l.start.X)) + ((l.end.Y - l.start.Y) * (l.end.Y - l.start.Y)));
+    return sqrt(pow(l.end.X - l.start.X,2) + pow(l.end.X - l.start.X,2));
 }
 
 
