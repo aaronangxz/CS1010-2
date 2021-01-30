@@ -43,57 +43,135 @@ void init_alien_planet( const char filename[], char alienPlanet[][20])
 
 void save_alien_planet(const char filename[], char matrix[][20])
 {
-    ofstream inf(filename);
+    ofstream outf(filename);
     char temp;
     int i, j;
 
     //Ensure the file can be opened
-    if (!inf.is_open()){
+    if (!outf.is_open()){
         cout << "Error in opening file!\n";
         return;
     }
 
-    for (i = 0; i < 20; i++){
-        for (j = 0; j < 20; j++){
-            
+    for (i = 0; i < 20; i++)
+    {
+        for (j = 0; j < 20; j++)
+        {
+            outf << matrix[i][j];
         }
+        outf << endl;
     }
-    inf.close();
+    outf.close();
 }
 
+int search_neighbours(char Planet[][PLANET_SIZE+2], int i, int j)
+{
+    int count = 0;
+    //Search neighbours
+    for (int k = i - 1; k <= i + 1; k++)
+    {
+        for (int l = j - 1; l <= j + 1; l++)
+        {
+            if(!(k == i && l == j))
+            {
+                if (Planet[k][l] == ALIVE  )
+                {
+                    count++;
+                    //cout << "Count ++" << endl;
+                }
+            }
+        }
+    }
+    return count;
+}
+
+void reset_planet (char alienPlanet[][PLANET_SIZE+2])
+{
+    for (int i = 0; i < PLANET_SIZE + 2; i++)
+    {
+        for (int j = 0; j < PLANET_SIZE + 2; j++)
+        {
+            alienPlanet[i][j] = DEAD;
+        }
+    }
+}
+
+void print_planet (char alienPlanet[][PLANET_SIZE])
+{
+    for (int i = 0; i < PLANET_SIZE ; i++)
+    {
+        for (int j = 0; j < PLANET_SIZE ; j++)
+        {
+            cout << alienPlanet[i][j];
+        }
+        cout << endl;
+    }
+}
 
 void evolve_alien_planet(char alienPlanet[][20], int nGeneration)
 {
-    char Evolved[20][20];
-    for (int row = 0; row < 20; row++)
+    char Evolved[PLANET_SIZE + 2][PLANET_SIZE + 2] = {{DEAD}};
+
+    reset_planet(Evolved);
+    //Copy existing planet to halo planet
+    for (int i = 0; i < PLANET_SIZE; i++)
     {
-        for (int col = 0; col < 20; col++)
+        for (int j = 0; j < PLANET_SIZE; j++)
         {
-            int neighbours = 0;
-            for (int i = 0; i <= row + 1 ; i++)
-            {
-                for (int j = 0; j <= col + 1; j++)
-                {
-                    //Next col on right
-                    if (col > 0 && alienPlanet[row][col - 1] == ALIVE )
-                    {
-                        /* code */
-                    }
-                    if (col < 19 && alienPlanet[row][col + 1] == ALIVE)
-                    {
-                        /* code */
-                    }
-                    
-                    
-                }
-                
-            }
-            
-            
+            Evolved[i+1][j+1] = alienPlanet[i][j];
         }
-        
     }
-    
+
+    while (nGeneration > 0)
+    {    
+        //Search halo planet for living alien
+        for (int i = 1; i <= PLANET_SIZE; i++)
+        {
+            for (int j = 1; j <= PLANET_SIZE; j++)
+            {
+                int liveCount = 0;
+                if (Evolved[i][j] == ALIVE)
+                {
+                    //Search neighbours
+                    liveCount = search_neighbours(Evolved,i,j);
+                    //cout << "Count for " << i << "," << j << " is " << liveCount << endl;
+                    //Conditions
+                    if (liveCount < 2) 
+                    {
+                        alienPlanet[i-1][j-1] = DEAD;
+                        //cout << i - 1 << "," << j - 1 << " is now dead." << endl;
+                    }
+                    //else if (liveCount == 2 || liveCount == 3) Evolved[i][j] = ALIVE;
+                    else if (liveCount > 3) 
+                    {
+                        alienPlanet[i-1][j-1] = DEAD;
+                        //cout << i - 1 << "," << j - 1 << " is now dead." << endl;
+                    }            
+                }  
+                else if (Evolved[i][j] == DEAD)
+                {
+                    //Search neighbours
+                    liveCount = search_neighbours(Evolved,i,j);
+                    //cout << "Count for " << i << "," << j << " is " << liveCount << endl;
+                    if (liveCount == 3) 
+                    {
+                        alienPlanet[i-1][j-1] = ALIVE;
+                        //cout << i - 1 << "," << j - 1 << " is now alive." << endl;
+                    }
+                }
+            }
+        }
+        //One generation done
+        nGeneration --;
+        //Copy updated alienPlanet to Evolved in order to perfomr next generation
+        for (int i = 0; i < PLANET_SIZE; i++)
+        {
+            for (int j = 0; j < PLANET_SIZE; j++)
+            {
+                Evolved[i+1][j+1] = alienPlanet[i][j];
+            }
+        }
+    }
 }
 
 /***********************************************************
@@ -120,4 +198,3 @@ int main( )
 
     return 0;
 }
-

@@ -40,7 +40,7 @@ int main()
     nRow = nCol = 20;
 
     //before initialization
-    //print_field(field, nRow, nCol);
+    print_field(field, nRow, nCol);
 
     //plant the mines
     //plant_mine(field, nRow, nCol, 10);
@@ -66,7 +66,7 @@ void print_field(int field[][MAXCOL], int nRow, int nCol)
             }
             else
             {
-                cout << "M";
+                cout << "9";
             } 
         }
         cout << endl;   
@@ -154,22 +154,24 @@ void plant_mine_halo(int field[][MAXCOL], int nRow, int nCol, int nMine)
         }
     }
     
-    int i, row, col;
+    int row, col;
 
-    for (i = 0; i < nMine; i++)
+    for (int i = 0; i < nMine; i++)
     {
         row = (rand() % nRow) + 1 ;
         col = (rand() % nCol) + 1;
         printf("Planting mine at [%d][%d]\n", row, col);
-    }
-    field_halo[row][col] = MINE;
-    for (int i = row - 1; i < row + 1; i++)
-    {
-        for (int j = col - 1; j < col + 1; j++)
+        field_halo[row][col] = MINE;
+
+        for (int i = row - 1; i <= row + 1; i++)
         {
-            field_halo[i][j]++;
+            for (int j = col - 1; j <= col + 1; j++)
+            {
+                field_halo[i][j]++;
+            }
         }
     }
+    
 
     for (int i = 0; i < MAXROW; i++)
     {
