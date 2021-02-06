@@ -6,14 +6,13 @@ using namespace std;
 int power(int base, int exponent)
 {
 	//Base case
-	if (exponent == 1) return base;
+	if (exponent == 0) return base;
 	return base * power(base,exponent - 1);
-
 }
 
 void print_prime_factor( int number )
 {
-	//Base casw
+	//Base case
 	if (number == 1) 
 	{
 		cout << endl;
@@ -34,8 +33,9 @@ void print_prime_factor( int number )
 
 int min_element(int array[], int N)
 {
-	
-	return 0;
+	if (N == 0) return array[N];
+	//Size is N, hence last index starts from N - 1
+	return min(min_element(array,N-1), array[N-1]);
 }
 
 int main()

@@ -5,9 +5,13 @@ using namespace std;
 
 int climb_stair(int N)
 {
- 	if (N == 1 || N == 0) return 1;
-    else if (N == 2) return 2;
-    else return climb_stair(N - 3) + climb_stair(N - 2)+ climb_stair(N - 1);
+ 	//Base case
+	if (N == 0) return 1;
+	if (N == 1) return 1;
+    if (N == 2) return 2;
+	if (N == 3) return 4;
+	//
+    else return climb_stair(N - 3) + climb_stair(N - 2) + climb_stair(N - 1);
 }
 
 int main()

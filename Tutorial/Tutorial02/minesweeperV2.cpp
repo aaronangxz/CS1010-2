@@ -117,12 +117,23 @@ bool user_input(int nRow, int nCol, int& refRow, int& refCol)
 
 void open_cell(Cell field[][MAXCOL], int row, int col)
 {
-    //TODO: Give it a try! Very hard :-)
-
-    //Current code is not correct, simply open the cell
-
-    field[row][col].is_open = true;
-
+    //Only proceed if cell is valid e.g. not out of bounds
+	if(is_valid(row,col))
+	{
+		//If current cell is already opened, do nothing
+		if(field[row][col].is_open) return;
+			//Else open it up
+			field[row][col].is_open = true;
+		//If it is not a mine
+		if(field[row][col].value == 0)
+		{
+			//Open neighbouring cells, e.g. up, down, left, right.
+			open_cell(field,row-1,col);
+			open_cell(field,row+1,col);
+			open_cell(field,row,col-1);
+			open_cell(field,row,col+1);
+		}
+	}
 }
 
 int main()
