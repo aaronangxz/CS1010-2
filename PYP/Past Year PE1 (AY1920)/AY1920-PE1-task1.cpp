@@ -5,6 +5,7 @@ using namespace std;
 
 int COG(int weight[], int size)
 {
+    
     return 0;   //remember to change this
 }
 
