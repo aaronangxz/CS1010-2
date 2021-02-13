@@ -5,34 +5,8 @@ using namespace std;
 
 int polynomial(int xValue, int termArray[], int nTerm)
 {
-   //Iterative
-   int sum = 0;
-   int power = 1;
-
-   for (int i = 0; i < nTerm; i++)
-   {
-       int pwr = power;
-       while (pwr > 1)
-       {
-           xValue *= xValue;
-           pwr--;
-       }
-       sum += termArray[i] * xValue;
-       power++;
-   }
-
-   //Base
-   if (nTerm - 1 == 0)
-   {
-       return xValue * termArray[nTerm];
-   }
-   else
-   {
-
-   }
-   
-   
-    return sum;   //remember to change!
+    if(nTerm == 0) return 0;
+    return xValue * (termArray[0] + polynomial(xValue, &termArray[1], nTerm - 1));  
 }
 
 void printPolynomial(int termArray[], int nTerm)
@@ -53,7 +27,6 @@ void printPolynomial(int termArray[], int nTerm)
         }
         cout << " ";
     }
-
     cout << endl;
 }
 
