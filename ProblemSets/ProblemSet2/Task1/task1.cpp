@@ -12,18 +12,21 @@ int fibonacci_m(int N, int known_result[])
     __call_count++;
 
     //Put your code below
-	if (known_result[N] == 0) 
+    if (known_result[N] == 0)
     {
-		if (N <= 2)
+        if (N <= 2)
         {
-            known_result[N] = 1;
+            known_result[2] = 1;
+            known_result[1] = 1;
+            known_result[0] = 0;
         }
         else
         {
-            known_result[N] = fibonacci_m(N - 1,known_result) + fibonacci_m(N - 2,known_result);
+            known_result[N] = fibonacci_m(N - 1,known_result) + known_result[N - 2];
+            return known_result[N];
         }
-	}
-	return known_result[N];
+    }
+    return known_result[N];
 }
 
 int main()
