@@ -5,8 +5,19 @@ using namespace std;
 
 int COG(int weight[], int size)
 {
+    int move = 0;
+    //Base case: When size is left with 1 e.g. reached centre
+    if (size == 1) return 0;
     
-    return 0;   //remember to change this
+    //Compare first index and last index
+    //If lesser, move 2 pos because COG shifted 1 pos to right, plus taking account of the pos that will be removed later
+    if (weight[0] < weight[size - 1]) move += 2;
+    //If equal, only move 1 pos because later index that already compared will be removed
+    else if (weight[0] == weight[size - 1]) move++;
+    //Point weight to second index 
+    //Minus size by 2
+    //as we have already compared first and last
+    return move + COG(&weight[1],size - 2);
 }
 
 int main()
