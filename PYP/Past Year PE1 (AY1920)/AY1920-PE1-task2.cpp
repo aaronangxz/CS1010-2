@@ -29,37 +29,37 @@ void print_trail(char region[MAXROW][MAXCOL], int nRow, int nCol)
 
 void flyRIGHT (char region[MAXROW][MAXCOL],int row)
 {
-    for (int i = 0; i < MAXCOL ; i++)
+    for (int i = 1; i < MAXCOL ; i++)
     {
-        if(region[row][i] == EMPTY || region[row][i] == RIGHT) region[row][i] = RIGHT;
-        else region[row][i] = CROSS;
+        if(region[row][i] != EMPTY) region[row][i] = CROSS;
+        else region[row][i] = RIGHT;
     }
 }
 
 void flyLEFT (char region[MAXROW][MAXCOL],int row)
 {
-    for (int i = MAXCOL - 1; i >= 0; i--)
+    for (int i = MAXCOL - 2; i >= 0; i--)
     {
-        if(region[row][i] == EMPTY || region[row][i] == LEFT) region[row][i] = LEFT;
-        else region[row][i] = CROSS;
+        if(region[row][i] != EMPTY) region[row][i] = CROSS;
+        else region[row][i] = LEFT;
     }
 }
 
 void flyUP (char region[MAXROW][MAXCOL],int col)
 {
-    for (int i = MAXROW - 1; i >= 0; i--)
+    for (int i = MAXROW - 2; i >= 0; i--)
     {
-        if(region[i][col] == EMPTY || region[i][col] == UP ) region[i][col] = UP;
-        else region[i][col] = CROSS;
+        if(region[i][col] != EMPTY) region[i][col] = CROSS;
+        else region[i][col] = UP;
     }
 }
 
 void flyDOWN (char region[MAXROW][MAXCOL],int col)
 {
-    for (int i = 0; i < MAXROW; i++)
+    for (int i = 1; i < MAXROW; i++)
     {
-        if(region[i][col] == EMPTY || region[i][col] == DOWN) region[i][col] = DOWN;
-        else region[i][col] = CROSS;
+        if(region[i][col] != EMPTY) region[i][col] = CROSS;
+        else region[i][col] = DOWN;
     }
 }
 
