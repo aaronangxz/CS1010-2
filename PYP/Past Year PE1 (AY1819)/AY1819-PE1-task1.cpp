@@ -4,8 +4,8 @@ using namespace std;
 
 int polynomial(int xValue, int termArray[], int nTerm)
 {
-   
-    return 0;   //remember to change!
+    if(nTerm == 0) return 0;
+    return xValue * (termArray[0] + polynomial(xValue, &termArray[1], nTerm - 1));  
 }
 
 void printPolynomial(int termArray[], int nTerm)
