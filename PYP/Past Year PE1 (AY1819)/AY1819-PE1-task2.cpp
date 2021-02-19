@@ -2,20 +2,63 @@
 
 using namespace std;
 
-struct LandPlot{
+struct LandPlot
+{
     int length, width;
 };
 
+void swap(LandPlot a[], int i, int j) 
+{
+    int temp_l,temp_w;
+
+    temp_l = a[i].length ; 
+    a[i].length = a[j].length ; 
+    a[j].length = temp_l;
+
+    temp_w = a[i].width ; 
+    a[i].width = a[j].width ; 
+    a[j].width = temp_w;
+}
 
 void sortLandPlot(LandPlot a[], int n)
 {
-
+    int i, j;
+    bool sorted;
+    for (i = n-1; i >= 1; i--) 
+    {
+        sorted = true;
+        for (j = 1; j <= i; j++) 
+        {
+            if ((a[j-1].length * a[j-1].width) > (a[j].length * a[j].width)) 
+            {
+                swap(a, j, j-1);
+                sorted = false;
+            }
+        } //end of inner loop 
+        if (sorted) return;
+    } 
 }
 
 
 int uniqueLandPlot(LandPlot a[], int n)
 {
-    return n;   //remember to change!
+    int count = 0, current = 0;
+    for (int i = 0; i < n ; i++)
+    {
+        if((a[i].length * a[i].width) != (a[i+1].length * a[i+1].width))
+        {
+            count++;
+            
+            if (i != current)
+            {
+                swap(a,i,current);
+            }
+            current++;
+        } 
+        else continue;
+    }
+    return count;
+    
 }
 
 void printLandPlot(LandPlot landArray[], int n)
