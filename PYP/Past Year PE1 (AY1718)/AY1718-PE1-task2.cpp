@@ -7,43 +7,124 @@ using namespace std;
 
 
 //You are not allowed to modify the structure definition
-struct Point3D {
+struct Point3D 
+{
     int X, Y, Z;
 };
 
 /**************** Combined ********************************/
-
-//You are not allowed to modify the function header
-int rank_reachable( Point3D planets[], int size, Point3D* starship, 
-            double maxDistance, Point3D reachable[])
+void swap(Point3D a[],int i, int j)
 {
-   
-    return 0;
+    //Swap X
+    int temp;
+    temp = a[i].X; 
+    a[i].X = a[j].X; 
+    a[j].X = temp ;
+
+    //Swap Y
+    temp = a[i].Y; 
+    a[i].Y = a[j].Y; 
+    a[j].Y = temp ;
+
+    //Swap Z
+    temp = a[i].Z; 
+    a[i].Z = a[j].Z; 
+    a[j].Z = temp ;
+
 }
 
-
+double calculateDistance(Point3D starship[], Point3D planets[], int size, int i)
+{
+    double distance = sqrt(((starship->X - planets[i].X) * (starship->X - planets[i].X)) 
+                                +((starship->Y - planets[i].Y) * (starship->Y - planets[i].Y))
+                                +((starship->Z- planets[i].Z) * (starship->Z - planets[i].Z))); 
+    return distance;
+}
 
 /************* Integer Bubble Sort ***************/
-void bubbleSort2 (int a[], int N)
+void bubbleSortDist (Point3D starship[], Point3D planets[], Point3D reachable[],int N)
 {
     bool is_sorted;
     int i, j, temp;
 
-    for (i = 0; i < N; ++i) {
+    for (i = 0; i < N; ++i) 
+    {
         is_sorted = true;
-        for (j = 1; j < N -i; ++j) {
-
-            if (a[j-1] > a[j]) {
-                temp = a[j-1] ; 
-                a[j-1] = a[j] ; 
-                a[j] = temp ;
+        for (j = 1; j < N -i; ++j) 
+        {
+            if(calculateDistance(starship,reachable,N,j-1) > calculateDistance(starship,reachable,N,j))
+            {
+                swap(reachable,j-1,j);
                 is_sorted = false;
             }
         } 
-
         if (is_sorted) return;
     } 
 }
+
+void bubbleSortPoints (Point3D reachable[],int N)
+{
+    bool is_sorted, x_sorted, y_sorted, z_sorted;
+    int i, j, temp;
+
+    for (i = 0; i < N; ++i) 
+    {
+        x_sorted = true;
+        is_sorted = true;
+        for (j = 1; j < N -i; ++j) 
+        {
+            if(reachable[j-1].X > reachable[j].X)
+            {
+                int temp;
+                temp = reachable[j-1].X; 
+                reachable[j-1].X = reachable[j].X; 
+                reachable[j].X = temp ;
+
+                is_sorted = false;
+                x_sorted = false;
+            }
+        } 
+        if (is_sorted) return;
+    } 
+}
+
+//You are not allowed to modify the function header
+int rank_reachable( Point3D planets[], int size, Point3D* starship, double maxDistance, Point3D reachable[])
+{
+    int count = 0;
+    for (int i = 0; i < size; i++)
+    {
+        double distance = calculateDistance(starship,planets,size,i);                     
+
+        if (distance <= maxDistance)
+        {
+            reachable[count].X += planets[i].X;
+            reachable[count].Y += planets[i].Y;
+            reachable[count].Z += planets[i].Z;
+            count ++;
+        }    
+    }
+
+    bubbleSortDist(starship,planets,reachable,count);
+
+    for (int i = 0; i < count; i++)
+    {
+        if (calculateDistance(starship,reachable,size,i) >= 0)
+        {
+            bubbleSortPoints(reachable,count);        
+        }
+        
+    }
+    
+    
+
+    
+    return count;
+}
+
+
+
+
 
 
 int main()
