@@ -5,7 +5,17 @@ using namespace std;
 
 int within(int a[], int N, int lower, int upper, int result[])
 {
-    return 0;
+    if(N == 0) return 0;
+
+    int count = 0;
+    if (a[0]>= lower && a[0] <= upper)
+    {
+        count++;
+        result[0] = a[0];
+        result = &result[1];
+    }
+    
+    return count + within(&a[1],N-1,lower,upper,result);
 }
 
 
