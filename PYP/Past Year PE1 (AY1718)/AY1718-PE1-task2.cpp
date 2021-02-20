@@ -33,27 +33,6 @@ void swap(Point3D a[],int i, int j)
 
 }
 
-void swapPoints(Point3D a[],int i, int j)
-{
-    //Swap X
-    int temp;
-    temp = a[i].X; 
-    a[i].X = a[j].X; 
-    a[j].X = temp ;
-
-    // //Swap Y
-    // temp = a[i].Y; 
-    // a[i].Y = a[j].Y; 
-    // a[j].Y = temp ;
-
-    // //Swap Z
-    // temp = a[i].Z; 
-    // a[i].Z = a[j].Z; 
-    // a[j].Z = temp ;
-
-}
-
-
 double calculateDistance(Point3D starship[], Point3D planets[], int size, int i)
 {
     double distance = sqrt(((starship->X - planets[i].X) * (starship->X - planets[i].X)) 
@@ -83,66 +62,66 @@ void bubbleSortDist (Point3D starship[], Point3D planets[], Point3D reachable[],
     } 
 }
 
-void bubbleSortPoints (Point3D reachable[],int N)
-{
-    bool is_sorted, x_sorted, y_sorted, z_sorted;
-    int i, j, temp;
+// void bubbleSortPoints (Point3D reachable[],int N)
+// {
+//     bool is_sorted, x_sorted, y_sorted, z_sorted;
+//     int i, j, temp;
 
-    for (i = 0; i < N; ++i) 
-    {
-        x_sorted = true;
-        is_sorted = true;
+//     for (i = 0; i < N; ++i) 
+//     {
+//         x_sorted = true;
+//         is_sorted = true;
 
-        //Sort X
-        for (j = 1; j < N -i; ++j) 
-        {
-            if(reachable[j-1].X > reachable[j].X)
-            {
-                int temp;
-                temp = reachable[j-1].X; 
-                reachable[j-1].X = reachable[j].X; 
-                reachable[j].X = temp ;
+//         //Sort X
+//         for (j = 1; j < N -i; ++j) 
+//         {
+//             if(reachable[j-1].X > reachable[j].X)
+//             {
+//                 int temp;
+//                 temp = reachable[j-1].X; 
+//                 reachable[j-1].X = reachable[j].X; 
+//                 reachable[j].X = temp ;
 
-                is_sorted = false;
-                x_sorted = false;
-            }
-        } 
+//                 is_sorted = false;
+//                 x_sorted = false;
+//             }
+//         } 
 
-        //Sort Y
-        y_sorted = true;
-        for (j = 1; j < N -i; ++j) 
-                {
-                    if(reachable[j-1].Y > reachable[j].Y)
-                    {
-                        int temp;
-                        temp = reachable[j-1].Y; 
-                        reachable[j-1].Y = reachable[j].Y; 
-                        reachable[j].Y = temp ;
+//         //Sort Y
+//         y_sorted = true;
+//         for (j = 1; j < N -i; ++j) 
+//                 {
+//                     if(reachable[j-1].Y > reachable[j].Y)
+//                     {
+//                         int temp;
+//                         temp = reachable[j-1].Y; 
+//                         reachable[j-1].Y = reachable[j].Y; 
+//                         reachable[j].Y = temp ;
 
-                        is_sorted = false;
-                        y_sorted = false;
-                    }
-                } 
+//                         is_sorted = false;
+//                         y_sorted = false;
+//                     }
+//                 } 
 
-        //Sort Z
-        z_sorted = true;
-        for (j = 1; j < N -i; ++j) 
-                {
-                    if(reachable[j-1].Z > reachable[j].Z)
-                    {
-                        int temp;
-                        temp = reachable[j-1].Z; 
-                        reachable[j-1].Z = reachable[j].Z; 
-                        reachable[j].Z = temp ;
+//         //Sort Z
+//         z_sorted = true;
+//         for (j = 1; j < N -i; ++j) 
+//                 {
+//                     if(reachable[j-1].Z > reachable[j].Z)
+//                     {
+//                         int temp;
+//                         temp = reachable[j-1].Z; 
+//                         reachable[j-1].Z = reachable[j].Z; 
+//                         reachable[j].Z = temp ;
 
-                        is_sorted = false;
-                        z_sorted = false;
-                    }
-                } 
+//                         is_sorted = false;
+//                         z_sorted = false;
+//                     }
+//                 } 
 
-        if (is_sorted) return;
-    } 
-}
+//         if (is_sorted) return;
+//     } 
+// }
 
 //You are not allowed to modify the function header
 int rank_reachable( Point3D planets[], int size, Point3D* starship, double maxDistance, Point3D reachable[])
@@ -183,17 +162,8 @@ int rank_reachable( Point3D planets[], int size, Point3D* starship, double maxDi
             }
         }
     }
-    
-    
-
-    
     return count;
 }
-
-
-
-
-
 
 int main()
 {
