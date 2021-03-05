@@ -42,11 +42,7 @@ void counting_sort(int score[], int N, int final[])
 
 void counting_sort2(SResult score[], int N, SResult final[])
 {
-    //Note: For clarity, we use both freq[] and cfreq[]
-    //      They can be combined, i.e. only 1 array if you want
     int freq[11] = {0}, cfreq[11] = {0};
-    //Declare new struct to store corresponding names
-    SResult names[12] = {{}};
     int i, curScore;
 
     //1. Compute Frquency
@@ -54,8 +50,6 @@ void counting_sort2(SResult score[], int N, SResult final[])
     {
         //Update frequency count of "i"th index in results[]
         freq[score[i].score] ++;
-        //Also Update the corresponding student names
-        names[i].studentID = score[i].studentID;
     }
 
     //2. Compute Cumulative Frequency
@@ -65,12 +59,12 @@ void counting_sort2(SResult score[], int N, SResult final[])
         cfreq[i] = cfreq[i-1] + freq[i];        
     }
 
-    //3. Produce Final Position
+    //Not Stable
     // for (i = 0; i < N; i++)
     // {
     //     curScore = score[i].score;
     //     final[ cfreq[ curScore ] - 1 ].score = curScore;
-    //     final[cfreq[ curScore ] - 1].studentID = names[i].studentID;
+    //     final[cfreq[ curScore ] - 1].studentID = score[i].studentID;
     //     cfreq[curScore]--;
     // } 
 
@@ -82,7 +76,7 @@ void counting_sort2(SResult score[], int N, SResult final[])
         //Look for corresponding index of ith score and save current score in final[]
         final[ cfreq[ curScore ] - 1 ].score = curScore;
         //Do the same for student ID
-        final[cfreq[ curScore ] - 1].studentID = names[i].studentID;
+        final[cfreq[ curScore ] - 1].studentID = score[i].studentID;
         cfreq[curScore]--;
     } 
 }
@@ -102,7 +96,6 @@ int main()
     for (i = 0; i < 12; i++)
 	{
         cout << sorted2[i].studentID << " " << sorted2[i].score << endl;
-        //printf("(%s, %d)\n", sorted2[i].studentID, sorted2[i].score);
 	}
     return 0;
 }
