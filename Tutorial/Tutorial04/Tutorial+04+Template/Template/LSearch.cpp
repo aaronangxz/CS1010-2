@@ -35,22 +35,33 @@ int Search7( int a[], int N)
     return idxOfX;
 }
 
-//WIP
-// int SearchPrime( int a[], int N) 
-// {
-//     //Initialize as -1
-//     int idxOfX = -1, i;
+bool isPrime(int X)
+{
+    if (X<2) return false;
+    int test, limit = sqrt(X);
 
-//     //Loop when index less than array size and idxofX is -1
-//     for ( i = 0; (i < N) && (idxOfX == -1); i++ ) 
-//     {
-//         //If matches target update idxOfX
-//         if ( a[i] % 7 == 0 )
-//             idxOfX = i;
-//         //Else return -1
-//     }
-//     return idxOfX;
-// }
+    for (test = 2; test <= limit; test++)
+    {
+        if (X % test == 0) return false;
+    }
+    return true;
+}
+
+int SearchPrime( int a[], int N) 
+{
+    //Initialize as -1
+    int idxOfX = -1, i;
+
+    //Loop when index less than array size and idxofX is -1
+    for ( i = 0; (i < N) && (idxOfX == -1); i++ ) 
+    {
+        //If matches target update idxOfX
+        if (isPrime(a[i]))
+            idxOfX = i;
+        //Else return -1
+    }
+    return idxOfX;
+}
 
 int main()
 {

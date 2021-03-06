@@ -63,8 +63,7 @@ void counting_sort2(SResult score[], int N, SResult final[])
     // for (i = 0; i < N; i++)
     // {
     //     curScore = score[i].score;
-    //     final[ cfreq[ curScore ] - 1 ].score = curScore;
-    //     final[cfreq[ curScore ] - 1].studentID = score[i].studentID;
+    //     final[cfreq[ curScore ] - 1] = score[i];
     //     cfreq[curScore]--;
     // } 
 
@@ -73,10 +72,8 @@ void counting_sort2(SResult score[], int N, SResult final[])
     {
         //Current score is the ith index of score[]
         curScore = score[i].score;
-        //Look for corresponding index of ith score and save current score in final[]
-        final[ cfreq[ curScore ] - 1 ].score = curScore;
         //Do the same for student ID
-        final[cfreq[ curScore ] - 1].studentID = score[i].studentID;
+        final[cfreq[ curScore ] - 1] = score[i];
         cfreq[curScore]--;
     } 
 }
