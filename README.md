@@ -42,11 +42,11 @@ This module builds on basic knowledge from TIC1001. Students will learn how to m
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"></td>
+      <td style="text-align: left">4/3/2021</td>
       <td style="text-align: left">Midterm Test</td>
     </tr>
     <tr>
-      <td style="text-align: left"></td>
+      <td style="text-align: left">20/2/2021</td>
       <td style="text-align: left">Practical Exam 1</td>
     </tr>
     <tr>
