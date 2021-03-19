@@ -8,6 +8,8 @@
         "__mutex_base": "cpp",
         "memory": "cpp",
         "type_traits": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "deque": "cpp",
+        "vector": "cpp"
     }
 }
