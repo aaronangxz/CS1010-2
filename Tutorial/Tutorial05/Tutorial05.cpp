@@ -17,7 +17,7 @@ void make_module(NUSModule &module, string code, int credits, string grade)
     module.code = code;
     module.credits = credits;
     module.grade = grade;
-    cout << "Module made: " << module.code << " with credit: " << module.credits << ", grade: " << module.grade << endl;
+    // cout << "Module made: " << module.code << " with credit: " << module.credits << ", grade: " << module.grade << endl;
 }
 
 void set_su(NUSModule &module, bool su) 
@@ -27,12 +27,12 @@ void set_su(NUSModule &module, bool su)
         if(module.grade == "D" || module.grade == "D+" || module.grade == "F")
         {
             module.grade = "U";
-            cout << "Module: " << module.code << " : U" << endl;
+            // cout << "Module: " << module.code << " : U" << endl;
         }
         else 
         {
             module.grade = "S";
-            cout << "Module: " << module.code << " : S" << endl;
+            // cout << "Module: " << module.code << " : S" << endl;
         }
     }
 }
@@ -45,22 +45,53 @@ int credits_obtained(const vector<NUSModule> &modules)
         if(modules[i].grade != "F" && modules[i].grade != "U")
         {
             credits += modules[i].credits;
-            cout << "Credit of " <<  modules[i].code << " is " << modules[i].credits << endl;
+            // cout << "Credit of " <<  modules[i].code << " is " << modules[i].credits << endl;
         }
     }
     return credits;
 }
 
-// double calculate_cap(const vector<NUSModule> &modules, const map<string, double> &points) 
-// {
-//     return 0;
-// }
+double calculate_cap(const vector<NUSModule> &modules, const map<string, double> &points) 
+{
+    double cap = 0;
+    int count = 0;
+    int credit = 0;
+    for(int i = 0; i < modules.size(); i++)
+    {
+        if(modules[i].grade != "S" && modules[i].grade != "U")
+        {
+            count ++;
+            for (pair<string, double> elements : points) 
+            {
+                if(elements.first == modules[i].grade) 
+                {
+                    cap += modules[i].credits * elements.second; 
+                    credit += modules[i].credits;
+                }
+            }
+        }
+    }
+    return cap / credit ;
+}
 
 int main(void)
 {
     NUSModule tic1001, tic1101, tba2102, tic2301, tic1231;
     //vector<NUSModule> modules ={{"tic1001",5,"F",true}};
     vector<NUSModule> modules;
+    map<string, double> grade2points;
+
+    grade2points.insert(pair<string, double>("A+", 5.0)); 
+    grade2points.insert(pair<string, double>("A", 5.0)); 
+    grade2points.insert(pair<string, double>("A-", 4.5)); 
+    grade2points.insert(pair<string, double>("B+", 4.0)); 
+    grade2points.insert(pair<string, double>("B", 3.5)); 
+    grade2points.insert(pair<string, double>("B-", 3.0)); 
+    grade2points.insert(pair<string, double>("C+", 2.5)); 
+    grade2points.insert(pair<string, double>("C", 2.0)); 
+    grade2points.insert(pair<string, double>("D+", 1.5)); 
+    grade2points.insert(pair<string, double>("D", 1.0)); 
+    grade2points.insert(pair<string, double>("F", 0.0)); 
 
     make_module(tic1231, "TIC1231", 2, "F");
     modules.push_back(tic1231);
@@ -78,6 +109,6 @@ int main(void)
     modules.push_back(tic2301);
 
     int ans = credits_obtained(modules);
-    cout << "Total Credit is: " << ans;
-    // calculate_cap(modules, grade2points);
+    cout << "Total Credit is: " << ans << endl;
+    cout << "CAP: " << calculate_cap(modules, grade2points);
 }
