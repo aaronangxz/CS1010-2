@@ -17,23 +17,16 @@ void make_module(NUSModule &module, string code, int credits, string grade)
     module.code = code;
     module.credits = credits;
     module.grade = grade;
-    // cout << "Module made: " << module.code << " with credit: " << module.credits << ", grade: " << module.grade << endl;
+    module.su = false;
+    //module = {code, credits, grade, false}; //Works too
 }
 
 void set_su(NUSModule &module, bool su) 
 {
     if(su == true) 
     {
-        if(module.grade == "D" || module.grade == "D+" || module.grade == "F")
-        {
-            module.grade = "U";
-            // cout << "Module: " << module.code << " : U" << endl;
-        }
-        else 
-        {
-            module.grade = "S";
-            // cout << "Module: " << module.code << " : S" << endl;
-        }
+        if(module.grade == "D" || module.grade == "D+" || module.grade == "F") module.grade = "U";
+        else module.grade = "S";
     }
 }
 
@@ -42,11 +35,7 @@ int credits_obtained(const vector<NUSModule> &modules)
     int credits = 0;
     for(int i = 0; i < modules.size(); i++)
     {
-        if(modules[i].grade != "F" && modules[i].grade != "U")
-        {
-            credits += modules[i].credits;
-            // cout << "Credit of " <<  modules[i].code << " is " << modules[i].credits << endl;
-        }
+        if(modules[i].grade != "F" && modules[i].grade != "U") credits += modules[i].credits;
     }
     return credits;
 }
@@ -54,21 +43,17 @@ int credits_obtained(const vector<NUSModule> &modules)
 double calculate_cap(const vector<NUSModule> &modules, const map<string, double> &points) 
 {
     double cap = 0;
-    int count = 0;
     int credit = 0;
+
     for(int i = 0; i < modules.size(); i++)
     {
-        if(modules[i].grade != "S" && modules[i].grade != "U")
+        string grade = modules[i].grade;
+        int credits = modules[i].credits;
+
+        if(grade != "S" && grade != "U")
         {
-            count ++;
-            for (pair<string, double> elements : points) 
-            {
-                if(elements.first == modules[i].grade) 
-                {
-                    cap += modules[i].credits * elements.second; 
-                    credit += modules[i].credits;
-                }
-            }
+            cap += credits * points.at(grade); 
+            credit += credits;
         }
     }
     return cap / credit ;

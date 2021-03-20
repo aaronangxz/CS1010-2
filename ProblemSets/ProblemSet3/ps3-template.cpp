@@ -2,16 +2,83 @@
 #include <vector>
 #include <string>
 #include <stack>  // to use STL stack
-// #include "stack.cpp" // to use honemade stack
+//  #include "stack.cpp" // to use honemade stack
 
 using namespace std;
 
 //*************************
 // Task 1: Matching bracket
 //*************************
-bool match_bracket(string expression) {
-    // Your code here
-    return false;
+bool match_bracket(string expression) 
+{   
+    stack<char> s; 
+    char x; 
+  
+    // Traversing the Expression 
+    for (int i = 0; i < expression.length(); i++)  
+    { 
+        if (expression[i] == '(' || expression[i] == '[' || expression[i] == '{')  
+        { 
+            // Push the element in the stack 
+            cout << "Pushed " << expression[i] << " to stack." << endl;
+            s.push(expression[i]); 
+            cout << "Stack contains " << s.size() << endl;
+            continue; 
+        } 
+  
+        // IF current current character is not opening 
+        // bracket, then it must be closing. So stack 
+        // cannot be empty at this point. 
+        // if (s.empty()) return false; 
+  
+        switch (expression[i]) { 
+        case ')': 
+            cout << "')' detected." << endl;
+
+            // Store the top element in a 
+            x = s.top(); 
+            s.pop(); 
+            if (x == '{' || x == '[') 
+            {
+                cout << x << " mismatched ')'" << endl;
+                return false; 
+            }
+            cout << "'(' matched." << endl;
+            break; 
+  
+        case '}': 
+            cout << "'}' detected." << endl;
+
+            // Store the top element in b 
+            x = s.top(); 
+            s.pop(); 
+            if (x == '(' || x == '[') 
+            {
+                cout << x << " mismatched '}'" << endl;
+                return false; 
+            }
+            cout << "'{' matched." << endl;
+            break; 
+  
+        case ']': 
+            cout << "']' detected." << endl;
+
+            // Store the top element in c 
+            x = s.top(); 
+            s.pop(); 
+            if (x == '(' || x == '{') 
+            {
+                cout << x << " mismatched ']'" << endl;
+                return false; 
+            }
+                cout << "'[' matched." << endl;
+            break; 
+        } 
+    } 
+  
+    // Check Empty Stack 
+    cout << "Stack is " << s.size()<< endl;
+    return s.empty(); 
 }
 
 
@@ -153,23 +220,26 @@ int main(void) {
     cout << boolalpha;  // tell cout to display bool as true/false
 
     // Task 1
-    cout << match_bracket("(1+[2-3]*{9/2})") << endl;
-    cout << match_bracket("(1+[2-3]*9/2})") << endl;
+    cout << match_bracket("1+2*[3**(1-2)]-{1/4}") << endl;
+    // cout << match_bracket("1 + 2 * [ 3 ** { 1 - 2) ] - { 1 / 4 }") << endl;
+    // cout << match_bracket("1+(2*3)**4") << endl;
+    // cout << match_bracket("(1+[2-3]*{9/2})") << endl;
+    // cout << match_bracket("(1+[2-3]*9/2})") << endl;
 
     // You may edit the expression for testing
     // Remember only non-negative integers are supported
-    string expression = "1+((2+3*4)/5)^6%7";
+    // string expression = "1+((2+3*4)/5)^6%7";
 
-    // Task 2
-    vector<Token> infix = tokenize(expression);
-    cout << "   Expr: " << expression << endl;
-    cout << "  Infix: " << infix << endl;
+    // // Task 2
+    // vector<Token> infix = tokenize(expression);
+    // cout << "   Expr: " << expression << endl;
+    // cout << "  Infix: " << infix << endl;
 
-    // Task 3
-    vector<Token> postfix = in_to_post(infix);
-    cout << "Postfix: " << postfix << endl;
+    // // Task 3
+    // vector<Token> postfix = in_to_post(infix);
+    // cout << "Postfix: " << postfix << endl;
 
-    // Task 4
-    cout << " Result: ";
-    cout << calculate(postfix) << endl;
+    // // Task 4
+    // cout << " Result: ";
+    // cout << calculate(postfix) << endl;
 } 
