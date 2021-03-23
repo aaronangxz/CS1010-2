@@ -62,7 +62,6 @@ double calculate_cap(const vector<NUSModule> &modules, const map<string, double>
 int main(void)
 {
     NUSModule tic1001, tic1101, tba2102, tic2301, tic1231;
-    //vector<NUSModule> modules ={{"tic1001",5,"F",true}};
     vector<NUSModule> modules;
     map<string, double> grade2points;
 

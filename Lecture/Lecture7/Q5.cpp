@@ -2,34 +2,36 @@
 #include<vector>;
 using namespace std;
 
-template <typename T>
+// template <typename T>
 
 struct LinkNode 
 {
-    T item;
-    LinkNode<T> *next;
+    int item;
+    LinkNode *next;
 };
 
 // -- DO NOT EDIT ABOVE --
 struct Stack 
 {
     //LinkNode<T> *mynode;
-    LinkNode<int> *first;
-    LinkNode<int> *next;
+    // LinkNode<int> *first;
+    LinkNode *next;
+    int top;
+
     // LinkNode<int> node[];
     // vector<int> v;
     // int *first;
 };
 
-LinkNode<int>* top = NULL;
 
 void push(Stack &s, int item) 
 {
-    LinkNode<int> *tmp;
-    tmp = new LinkNode<int>();  
+    LinkNode *tmp;
+    tmp = new LinkNode ();  
     tmp->item = item;
     tmp->next = s.next;
     s.next = tmp;
+    
     // LinkNode<T> node = ;
     // node.item = item;
     // node.next = s->first;
@@ -39,7 +41,7 @@ void push(Stack &s, int item)
 // Note that pop need not return the value that is popped
 void pop(Stack &s) 
 {
-    LinkNode<int> *tmp = top;
+    LinkNode *tmp = top;
     top = top->next;
     tmp->next = NULL;
     free(tmp);

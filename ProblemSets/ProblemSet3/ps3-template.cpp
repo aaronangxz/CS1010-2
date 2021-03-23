@@ -220,11 +220,11 @@ int main(void) {
     cout << boolalpha;  // tell cout to display bool as true/false
 
     // Task 1
-    cout << match_bracket("1+2*[3**(1-2)]-{1/4}") << endl;
+    // cout << match_bracket("1+2*[3**(1-2)]-{1/4}") << endl;
     // cout << match_bracket("1 + 2 * [ 3 ** { 1 - 2) ] - { 1 / 4 }") << endl;
     // cout << match_bracket("1+(2*3)**4") << endl;
     // cout << match_bracket("(1+[2-3]*{9/2})") << endl;
-    // cout << match_bracket("(1+[2-3]*9/2})") << endl;
+    cout << match_bracket("(1+[2-3]*9/2})") << endl;
 
     // You may edit the expression for testing
     // Remember only non-negative integers are supported

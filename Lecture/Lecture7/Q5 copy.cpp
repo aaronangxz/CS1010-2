@@ -60,12 +60,11 @@ int peek(Stack &s) {
     
     while ( a != NULL ) 
     {
-        if (s.next->item != NULL)
+        if (a->item != NULL)
         {
-            result = s.next->item;
-            a = s.next;
+            result = a->item;
+            a = a->next;
         }
-        
     }
     return result;
     
@@ -76,10 +75,4 @@ bool empty(Stack &s) {
     if (s.top == 0) return true;
     
     return false ;
-}
-
-
-int main(void)
-{
-
 }
