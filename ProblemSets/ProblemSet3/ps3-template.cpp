@@ -31,7 +31,8 @@ bool match_bracket(string expression)
         // cannot be empty at this point. 
         // if (s.empty()) return false; 
   
-        switch (expression[i]) { 
+        switch (expression[i]) 
+        { 
         case ')': 
             cout << "')' detected." << endl;
 
