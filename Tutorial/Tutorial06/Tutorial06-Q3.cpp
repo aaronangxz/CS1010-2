@@ -8,7 +8,7 @@ using namespace std;
 struct Airport 
 {
     string name;
-    set<Airport *> connections;
+    set<Airport*> connections;
 };
 
 bool direct_connect(Airport &src, Airport &dst) 
@@ -30,27 +30,37 @@ bool indirect_connect(Airport &src, Airport &dst)
 {    
     if(src.connections.count(&dst)) return 1;
 
-    // Airport newnew;
-    // newnew.name = "src_next";
-    // newnew.connections = src.connections;
-
-    vector<Airport*> src_connections;
+    vector<Airport*> src_cx;
     for (Airport* element : src.connections)
     {
-        src_connections.push_back(element);
+        src_cx.push_back(element);
     }
     
-    for(int i = 0; i < src_connections.size(); i++)
+/*
+    for(int i = 0; i < src_cx.size(); i++)
     {
-        vector<Airport*> src_connections_connections;
-        for (Airport* element : src_connections[i]->connections)
+        // vector<Airport*> src_cxcx;
+        for (Airport* element1 : src_cx[i]->connections)
         {
-            src_connections_connections.push_back(element);
+            // src_cxcx.push_back(element);
+            if (element1->connections.count(&dst)) return 1;
         }
-        if (src_connections_connections[i]->connections.count(&dst)) return 1;
-    }
+        // return (src_connections_connections[i]->connections.count(&dst));
+
+        // for(int j = 0; j < src_cxcx.size(); j++)
+        // {
+        //     if (src_cxcx[j]->connections.count(&dst)) return 1;
+        // }
+
+        // if (src_cxcx[i]->connections.count(&dst)) return 1;
+        // else return 0;
+
+        // return (src_cxcx[i]->connections.count(&dst));
+
+    }       
     return 0;
     // else indirect_connect(dst, dst) ;
+  */  
 }
 
 int main(void)
@@ -83,19 +93,19 @@ int main(void)
     KUL_s.connections = KUL_connection;
 
     set<Airport*> ::iterator itr;
-    for (itr = SIN_connection.begin(); itr != SIN_connection.end(); itr++)  
-    { 
-        cout << *itr<<" "; 
-    } 
-    cout << endl;
-    for (itr = KUL_connection.begin(); itr != KUL_connection.end(); itr++)  
-    { 
-        cout << *itr<<" "; 
-    } 
+    // for (itr = SIN_connection.begin(); itr != SIN_connection.end(); itr++)  
+    // { 
+    //     cout << *itr<<" "; 
+    // } 
+    // cout << endl;
+    // for (itr = KUL_connection.begin(); itr != KUL_connection.end(); itr++)  
+    // { 
+    //     cout << *itr<<" "; 
+    // } 
 
     cout << endl;
     cout << boolalpha;
-    // cout << direct_connect(SIN_s,KUL_s);
+    cout << direct_connect(SIN_s,KUL_s);
     cout << indirect_connect(SIN_s,KUL_s);
 
 }
