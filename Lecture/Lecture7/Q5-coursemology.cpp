@@ -1,3 +1,5 @@
+#include <vector>
+using namespace std;
 template <typename T>
 
 struct LinkNode 
@@ -7,8 +9,8 @@ struct LinkNode
 };
 
 // -- DO NOT EDIT ABOVE --
-LinkNode *head;
-LinkNode *tail;
+// LinkNode *head;
+// LinkNode *tail;
 
 struct Stack 
 {
@@ -17,7 +19,9 @@ struct Stack
     LinkNode<int> *next;    
     // LinkNode[] node;
     // int *first;
-    int  top;
+    int top;
+    vector<int> v;
+    
 };
 
 // LinkNode<int>* top = NULL;
@@ -33,7 +37,8 @@ void push(Stack &s, int item)
     // node.item = item;
     // node.next = s->first;
     // s->first = item;
-    s.top++;
+    // s.top++;
+    s.v.push_back(item);
 }
 
 // Note that pop need not return the value that is popped
@@ -45,34 +50,36 @@ void pop(Stack &s)
     // free(tmp);
     // s->first = s.first.next;
     // your code here      
-    s.top--;
+    // s.top--;
+    s.v.pop_back();
 }
 
 int peek(Stack &s) {
     // your code here  
 
-    LinkNode<int> *a;
-    a = new LinkNode<int>();
+    // LinkNode<int> *a;
+    // a = new LinkNode<int>();
     
-    a = s.next;
-    int result = 0;
+    // a = s.next;
+    // int result = 0;
     
-    while ( a != NULL ) 
-    {
-        if (a->item != NULL)
-        {
-            result = a->item;
-            a = a->next;
-        }
+    // while ( a != NULL ) 
+    // {
+    //     if (a->item != NULL)
+    //     {
+    //         result = a->item;
+    //         a = a->next;
+    //     }
         
-    }
-    return result;
-    
+    // }
+    // return result;
+    return s.v.back();
 }
 
 bool empty(Stack &s) {
     // your code here  
-    if (s.top == 0) return true;
+    // if (s.top == 0) return true;
     
-    return false ;
+    // return false ;
+    return s.v.empty();
 }

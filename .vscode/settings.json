@@ -12,6 +12,7 @@
         "deque": "cpp",
         "vector": "cpp",
         "ios": "cpp",
-        "__node_handle": "cpp"
+        "__node_handle": "cpp",
+        "typeindex": "cpp"
     }
 }
