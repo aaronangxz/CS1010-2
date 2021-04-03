@@ -9,8 +9,8 @@ private:
 public:
     Animal(string species, string sound)
     {
-        _species = species;
-        _sound = sound;
+        this->_species = species;
+        this->_sound = sound;
     }
     string get_species() { return _species; }
     string get_sound() { return _sound; }
@@ -37,7 +37,6 @@ public:
     //         cout << "With a " << _farm[i]->get_sound() << " " << _farm[i]->get_sound()<< " here and a " << _farm[i]->get_sound() << " " << _farm[i]->get_sound() << " there" << endl;
     //         cout << _farm[i]->get_sound() << " here " << _farm[i]->get_sound() << " there, everywhere " << _farm[i]->get_sound() << " " << _farm[i]->get_sound() << endl;
     //         cout<< "Old McDonald had a farm, E-I-E-I-O" << endl << endl;
-    //         // if (i != _farm.size() - 1) cout << endl << endl;
     //     }
     // }
     void sing() {
@@ -47,7 +46,6 @@ public:
             cout << "With a " << _farm[i]->get_sound() << " " << _farm[i]->get_sound()<< " here and a " << _farm[i]->get_sound() << " " << _farm[i]->get_sound() << " there\n";
             cout << _farm[i]->get_sound() << " here " << _farm[i]->get_sound() << " there, everywhere " << _farm[i]->get_sound() << " " << _farm[i]->get_sound() << "\n";
             cout<< "Old McDonald had a farm, E-I-E-I-O\n\n";
-            // if (i != _farm.size() - 1) cout << endl << endl;
         }
     }
 };
