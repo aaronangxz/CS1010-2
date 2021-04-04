@@ -88,36 +88,38 @@ bool match_bracket(string expression)
 //******************
 struct Token {
     // your code here
-
+    char _operator;
+    int _operand;
 };
 
 Token make_token(int i) {
     Token t;
     // your code here
-
+    t._operator = i;
     return t;
 }
 
 Token make_token(char op) {
     Token t;
     // your code here
-
+    t._operand = op;
     return t;
 }
 
 char get_optr(Token t) {
     // your code here
-
+    return t._operator;
 }
 
 int get_opnd(Token t) {
     // your code here
-
+    return t._operand;
 }
 
 bool is_opnd(Token t) {
+    if (t._operand >= 0 && t._operand <= 9) return true;
+    else return false;
     // your code here
-
 }
 
 //***************************************
@@ -225,16 +227,16 @@ int main(void) {
     // cout << match_bracket("1 + 2 * [ 3 ** { 1 - 2) ] - { 1 / 4 }") << endl;
     // cout << match_bracket("1+(2*3)**4") << endl;
     // cout << match_bracket("(1+[2-3]*{9/2})") << endl;
-    cout << match_bracket("(1+[2-3]*9/2})") << endl;
+    // cout << match_bracket("(1+[2-3]*9/2})") << endl;
 
     // You may edit the expression for testing
     // Remember only non-negative integers are supported
-    // string expression = "1+((2+3*4)/5)^6%7";
+    string expression = "1+((2+3*4)/5)^6%7";
 
     // // Task 2
-    // vector<Token> infix = tokenize(expression);
-    // cout << "   Expr: " << expression << endl;
-    // cout << "  Infix: " << infix << endl;
+    vector<Token> infix = tokenize(expression);
+    cout << "   Expr: " << expression << endl;
+    cout << "  Infix: " << infix << endl;
 
     // // Task 3
     // vector<Token> postfix = in_to_post(infix);
