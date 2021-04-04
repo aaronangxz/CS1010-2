@@ -180,6 +180,7 @@ int priority(Token t) {
             return 0;
         case '*':       
         case '/':
+        case '%':
             return 1;
         case '^':
             return 2;
@@ -227,7 +228,6 @@ vector<Token> in_to_post(vector<Token> infix) {
             cout << "push ( to s" << endl;
         }
         //if token is operator
-         //if token is open bracket
         else if (get_optr(infix[i]) == ')')
         {
             cout << "found )" << endl;
@@ -353,7 +353,7 @@ int main(void) {
 
     // You may edit the expression for testing
     // Remember only non-negative integers are supported
-    string expression = "1 + ( 2 * 3 ) ^ 4";
+    string expression = "1 + 2 * [ 3 ** ( 1 - 2) ] - { 1 / 4 }";
     // string expression = "(1+2)*3^4";
 
 
