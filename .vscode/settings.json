@@ -13,6 +13,7 @@
         "vector": "cpp",
         "ios": "cpp",
         "__node_handle": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "stack": "cpp"
     }
 }
