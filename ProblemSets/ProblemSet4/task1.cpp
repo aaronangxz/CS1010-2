@@ -48,7 +48,7 @@ virtual double distance_to(const Point& anotherPt ) const {
 //TODO: useful method to the main task
 //Return true if p has the same (x,y) as this object
 virtual bool equal(const Point& p){
-
+    if(this->get_x() ==  p.get_x() && this->get_y() == p.get_y()) return true;
     return false; //remember to change
 }
 
@@ -91,7 +91,8 @@ virtual double length() const {
 //Return true if l has the same end points as this object
 //Note that the end points may be reversed for the two lines
 bool equal( const Line& l) {
-
+    if(this->get_end().get_x() == l.get_end().get_x() && this->get_end().get_y() == l.get_end().get_y()) return true;
+    else if (this->get_end().get_x() == l.get_start().get_x() && this->get_end().get_y() == l.get_start().get_y()) return true;
     return false; //remember to change
 }
 
