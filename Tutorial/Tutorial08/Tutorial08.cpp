@@ -8,37 +8,25 @@ private:
     string _sound; // e.g. Moo
 
 public:
-    Animal()
-    {
-
-    }
-
     Animal(string name, string sound) 
     {
         _name = name;
         _sound = sound;
     }
     string getName() { return _name; }
-    string getSound() { return _sound; }
+    virtual string getSound() { return _sound; }
 };
 
 class Flyer : public Animal {
-private:
-    string _name;
-    string _sound;
+protected:
     bool _isFlying;
 public:
-    Flyer(string name, string sound): _name(name), _sound(sound), _isFlying(true) {}
+    Flyer(string name, string sound): Animal(name, sound), _isFlying(false) {}
 
     string getSound()   
     {
         if(_isFlying) return "flap";
         else return Animal::getSound();
-    }
-    bool isFlying()
-    {
-        if(_isFlying) return true;
-        return false;
     }
 
     void fly() { _isFlying = true; }
@@ -51,16 +39,14 @@ private:
 public:
     Glider(string name, string sound): Flyer(name, sound), _isGliding(false) {}
 
-    void glide() { if(isFlying()) _isGliding = true; }
-
+    void glide() { if(_isFlying) _isGliding = true; }
     void stop() { Flyer::stop(); _isGliding = false; }
 
     string getSound() {
     if(_isGliding) return "woosh";
-    else return getSound();
+    else return Flyer::getSound();
     }
 };
-
 
 class NewMcDonald {
 private:
@@ -74,7 +60,7 @@ NewMcDonald()
 }
 ~NewMcDonald() 
 {
-     _farm.clear();
+    _farm.clear();
     /* TODO: New McDonald has no (more) farm... */
 }
 void sing() {
