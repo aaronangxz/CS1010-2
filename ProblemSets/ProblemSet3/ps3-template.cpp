@@ -260,7 +260,7 @@ vector<Token> in_to_post(vector<Token> infix) {
                 //Otherwise pop until satisfy requirements
                 else
                 {
-                    while(get_optr(s.top()) != '(' || get_optr(s.top()) != ')' || (priority(infix[i]) < priority(s.top())))
+                    while(get_optr(s.top()) != '(' || get_optr(s.top()) != ')' || (priority(infix[i]) <= priority(s.top())))
                     {
                         
                         cout << "pop " << s.top()._operator << " from s " << endl;
