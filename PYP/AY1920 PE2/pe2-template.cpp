@@ -19,25 +19,55 @@ bool close_contact(GPS g1, GPS g2) {
 /** END OF ADT **/
 
 /* Part A */
-struct Person {
-
+struct Log {
+    long time;
+    GPS pos;
 };
 
+struct Person {
+    // Just need to maintain a history of Logs
+    vector<Log> log;
+};
 
 /* Part B */
-void log(Person &person, long time, GPS position) {
-    
+void log(Person &person, long time, GPS position) 
+{
+    int i;
+    for (i = 0; i < person.log.size(); i++)
+    {
+        if(person.log[i].time > time) break;
+    }
+    person.log.insert(person.log.begin() + i,{time,position});
 }
 
 
 /* Part C */
-bool has_contact(Person &person, long time, GPS position) {
+bool has_contact(Person &person, long time, GPS position) 
+{  
+    vector<Log> log = person.log;
+    for(int i = 0; i < log.size(); i++)
+    {
+        if((log[i].time <= time) && close_contact(log[i].pos,position) && (i==log.size()-1 || time <= (log[i+1].time)))
+        {
+            return true;
+        }
+    }
     return false;
 }
 
 
 /* Part D */
-bool has_contact(Person &p, Person &q) {
+bool has_contact(Person &p, Person &q) 
+{
+    for (Log l : p.log) {        
+        if (has_contact(q, l.time, l.pos))
+            return true;        
+    }              
+    // Do the same for the reverse
+    for (Log l : q.log) {
+        if (has_contact(p, l.time, l.pos))
+            return true;        
+    }
     return false;
 }
 
