@@ -132,7 +132,7 @@ virtual bool add(Point& p)
     Lines.push_back(Line(Points.back(),p));
     Lines.push_back(Line(p,Points.front()));
     Points.push_back(p);
-    return false; //remember to change
+    return true; //remember to change
 }
 
 virtual bool add(Line& exist, Point& p) 
