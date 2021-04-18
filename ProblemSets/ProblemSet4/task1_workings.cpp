@@ -45,10 +45,14 @@ virtual double distance_to(const Point& anotherPt ) const {
     return sqrt(x*x + y*y);
 }
 
+
 //TODO: useful method to the main task
 //Return true if p has the same (x,y) as this object
+// ******** Replace the following method with your solution  *************
 virtual bool equal(const Point& p){
-    if(this->get_x() ==  p.get_x() && this->get_y() == p.get_y()) return true;
+
+    if (this->get_x()==p.get_x() && this->get_y() == p.get_y()) return true;
+    
     return false; //remember to change
 }
 
@@ -60,6 +64,8 @@ virtual void print(ostream &out) {
 private:
     double p[2];
 };
+
+
 
 /*****************************
 Line Class
@@ -88,12 +94,17 @@ virtual double length() const {
 }
 
 //TODO: useful method to the main task
-//Return true if l has the same end points as this object
+//Return true if l has the same start end points as this object
 //Note that the end points may be reversed for the two lines
+// ******** Replace the following method with your solution  ************* 
 bool equal( const Line& l) {
-    if(this->start.equal(l.get_start()) && this->end.equal(l.get_end())) return true;
-    else if (this->start.equal(l.get_end()) && this->end.equal(l.get_start())) return true;
-    return false; //remember to change
+    if (this->start.equal(l.get_start()) && this->end.equal(l.get_end())) {
+        return true;
+    } else if (this->start.equal(l.get_end()) && this->end.equal(l.get_start())) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
@@ -101,89 +112,140 @@ private:
     Point start, end;
 }; 
 
+
+
+
+
 /*****************************
 Polygon Class
 *****************************/
 
 //TODO: Decide the internal representation and complete
 //      the methods in this class
+
+
+// ******* You may want to replace the entire class below with your solution
+// ******* Just make sure you use the same method header
+
 class Polygon {
 
 public:
 
-Polygon( const Point& p1, const Point& p2, const Point& p3) 
-{
-    Points.push_back(p1);
-    Points.push_back(p2);
-    Points.push_back(p3);
-
-    Lines.push_back(Line(p1,p2));
-    Lines.push_back(Line(p2,p3));
-    Lines.push_back(Line(p3,p1));
+Polygon( const Point& p1, const Point& p2, const Point& p3) {
+    points.push_back(p1);
+    points.push_back(p2);
+    points.push_back(p3);
+    lines.push_back(Line(p1,p2));
+    lines.push_back(Line(p2,p3));
+    lines.push_back(Line(p3,p1));
 }
 
-virtual bool add(Point& p) 
-{
-    for(Point point : Points)
+virtual bool add(Point& p) {
+
+    for (Point scan : points)
     {
-        if(point.equal(p)) return false;
+        if (scan.equal(p)) return false;
     }
-    Lines.pop_back();
-    Lines.push_back(Line(Points.back(),p));
-    Lines.push_back(Line(p,Points.front()));
-    Points.push_back(p);
-    return false; //remember to change
-}
+    
+    lines.pop_back();
+    lines.push_back(Line (points.back(),p));
+    lines.push_back(Line (p, points.front()));
+    points.push_back(p);
 
-virtual bool add(Line& exist, Point& p) 
-{
-    int count = 0;
-    bool isExist = false;
-    for(int i = 0; i < Lines.size(); i++)
-    {
-        if(Lines[i].equal(exist))
-        {
-            count = i;
-            isExist = true;
-            break;
-        }
-    }
-
-    if(!isExist) return false;
-
-    Point start = exist.get_start();
-    Point end = exist.get_end();
-    Line to = Line(start,p);
-    Line from = Line(p,end);
-    Points.push_back(p);
-    Lines.erase(Lines.begin() + count);
-    Lines.insert(Lines.begin() + count, to);
-    Lines.insert(Lines.begin() + count + 1,from);
     return true; //remember to change
 }
 
-virtual double perimeter() 
-{
-    double peri = 0;
-    for(Line b: Lines) peri += b.length();
-    return peri;
+virtual bool add(Line& exist, Point& p) {
+    int track = 0;
+    bool doesLineExist = false;
+    for (int i = 0; i<lines.size(); i++)
+    {
+        if(lines[i].equal(exist)) 
+        {   
+            track = i;
+            doesLineExist = true;
+            break;
+        }
+        
+    }
+
+    if (!doesLineExist) return false;
+
+    Point startOfP = exist.get_start(); //start coordinates of the line exist
+    Point endOfP = exist.get_end(); //end coordinates of the line exist
+    Line towardsP = Line(startOfP,p);
+    Line fromP = Line(p,endOfP);
+
+    points.push_back(p);
+    lines.erase(lines.begin()+track);
+    lines.insert(lines.begin()+track, towardsP);
+    lines.insert(lines.begin()+track+1, fromP);
+
+    return true;
+
 }
 
-virtual void print( ostream& out ) 
-{
+// virtual bool add(Line& exist, Point& p) {
+//     bool isLineExist = false;
+//     int lineIndex = -1;
+//     int counter = -1;
+//     for (Line dinosaur : lines)
+//     {
+//         counter++;
+//         if (dinosaur.equal(exist))
+//         {
+//             lineIndex = counter;
+//             isLineExist = true;
+//         }
+       
+//     }
 
+//     if (!isLineExist) {
+//         return false;
+//     }
+    
+//     Point line_start = exist.get_start();
+//     Point line_end = exist.get_end();
+
+//     Line start_to_p = Line(line_start, p);
+//     Line p_to_end = Line(p,line_end);
+
+//     //add one point and two lines into points and lines vector
+//     points.push_back(p);
+//     lines.erase(lines.begin() + lineIndex);
+//     lines.insert(lines.begin() + lineIndex, start_to_p);
+//     lines.insert(lines.begin()+ lineIndex + 1, p_to_end);
+
+//     return true;
+// }
+
+virtual double perimeter() {
+    
+    double total = 0;
+
+    for (Line border : lines)
+    {
+        total += border.length();
+    }
+
+    return total;
+
+    return 0; //remember to change
+}
+
+virtual void print( ostream& out ) {
+    for (Point p : points) {
+        p.print(out);
+        out << " -> ";
+    }
+    points[0].print(out);
+    out << endl;
 //Printing format example
 //(1,1) -> (2,2) -> (3,3) -> (1,1)
 //Notes:
 //     No extra space at the end
 //     The first point is printed again at the end
-    for(Point p: Points)
-    {
-        p.print(out);
-        out << " -> ";
-    }
-    Points[0].print(out);
-    out << endl;
+
 }
 
 
@@ -192,8 +254,8 @@ private:
 //TODO: Decide your internal representation
 // e.g. vector of points / lines,
 //   linked list of points / lines etc
-    vector<Point> Points;
-    vector<Line> Lines;
+    vector<Point> points;
+    vector<Line> lines;
 };
 
 
