@@ -8,6 +8,7 @@ using namespace std;
 //Purpose: Move block(s) down one step in column "col" //Return: true if any block is moved, false if cannot move 
 bool fall_one_step( char grid[NROW][NCOL], int col ) 
 {
+    /*
     stack<char> s;
     int count = 0;
     int move = 0;
@@ -40,15 +41,36 @@ bool fall_one_step( char grid[NROW][NCOL], int col )
     }
     // if (isFall) return true;
     // return false;
+    */
+   bool isFall = false;
+   for(int i = NROW - 1; i > 0; i++)
+   {
+       if(grid[i][col] == EMPTY && grid[i - 1][col] != EMPTY)
+       {
+           grid[i][col] = grid[i - 1][col];
+           grid[i - 1][col] = EMPTY;
+           isFall = true;
+       }
+   }
+   return isFall;
+
 }
 
 //Purpose: Move block(s) as far as possible for ALL columns 
 void apply_gravity( char grid[NROW][NCOL] )
 {
+    /*
     for(int i = 0; i < NCOL; i++)
     {
         fall_one_step(grid,i);
     }
+    */
+    for(int i = 0; i < NCOL; i++)
+    {
+        while(fall_one_step(grid,i));
+    }
+
+    
 }
     
 int main()
