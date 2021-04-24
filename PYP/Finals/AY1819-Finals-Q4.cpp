@@ -4,8 +4,7 @@
 using namespace std;
 
 struct Order {
-int distance;
-... // other fields
+    int distance;
 };
 
 class Vehicle {
@@ -13,8 +12,9 @@ private:
     int reach;
 public:
     vector<Order> completed_orders;
-    Vehicle(int reach) {
-    this->reach = reach;
+    Vehicle(int reach) 
+    {
+        this->reach = reach;
     }
     virtual bool deliver(Order order) 
     {
