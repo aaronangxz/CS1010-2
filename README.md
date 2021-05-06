@@ -20,13 +20,19 @@ This module builds on basic knowledge from TIC1001. Students will learn how to m
 
 **Tutorial**<br>
 1. Structure, Nested Loop, Composite Data Structures <br>
-
-**Lab**<br>
+2. Recursion<br>
+3. Complexity & Sorting<br>
+4. Additional Applications<br>
+5. Abstract Data Types<br>
+6. Recursive Containers<br>
+7. Object Oriented Programming<br>
+8. OOP Concepts<br>
 
 **Problem Sets**<br>
 1. Structure, Nested Loop, Composite Data Structures <br>
-
-**Extra**<br>
+2. Recursion & Sorting<br>
+3. Calculating with Stacks<br>
+4. Object Oriented Programming<br>
 
 **Practical Exam**<br>
 
@@ -50,11 +56,11 @@ This module builds on basic knowledge from TIC1001. Students will learn how to m
       <td style="text-align: left">Practical Exam 1</td>
     </tr>
     <tr>
-      <td style="text-align: left"></td>
+      <td style="text-align: left">17/04/2021</td>
       <td style="text-align: left">Practical Exam 2</td>
     </tr>
     <tr>
-      <td style="text-align: left"></td>
+      <td style="text-align: left">27/04/2021</td>
       <td style="text-align: left">Final Exam</td>
     </tr>
   </tbody>
